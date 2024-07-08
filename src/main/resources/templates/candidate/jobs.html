@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Vagas Disponíveis</title>
+</head>
+<body class="bg-blue-950">
+   
+<nav class="bg-amber-600">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-start text-white">
+            <div class="text-white space-x-4 font-bold">
+
+              <a href="/candidate/profile" >Perfil</a>
+              <a href="/candidate/jobs" class="bg-blue-950 rounded-md px-3 py-2">Vagas</a>
+              
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container mx-auto mt-24 text-center">
+    <form action="">
+        <input type="text" name="filter" placeholder="Busca de vagas" class="bg-gray-50 text-gray-500 rounded w-80 p-2 focus:outline-none" />
+        <button class="bg-amber-800 hover:bg-amber-600 text-white w-24 p-2 ml-2 rounded">Buscar</button>
+    </form>
+
+    <div class="max-w-md mx-auto mt-10">
+
+    <form action="" th:action="@{/candidate/jobs/apply}" method="post">
+        <div class="text-white bg-blue-900 rounded-lg p-4 mb-4 shadow-md text-justify" th:each="job: ${jobs}">
+            <input type="hidden" name="jobId" th:value="${job.id}">
+                <span class="mt-2 block font-bold">Descrição :</span>
+            <h3 th:text="${job.description}"></h3>
+                <span class="mt-4 block font-bold">Cargo :</span>
+            <span th:text="${job.level}" class="block"></span>
+                <span class="mt-4 block font-bold">Benefícios :</span>
+            <span th:text="${job.benefits}" class="block"></span>
+                <button class=" mt-4 bg-amber-800 hover:bg-amber-600 font-bold py-2 px-4 rounded text-white">Aplicar</button>
+        </div>
+    </form>
+
+    </div>
+   
+</div>
